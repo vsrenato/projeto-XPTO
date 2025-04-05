@@ -1,0 +1,14 @@
+- name: Configuração inicial das VMs On-Prem
+  hosts: onprem
+  become: yes
+  tasks:
+    - name: Instalar Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Copiar chave SSH
+      copy:
+        src: ./id_rsa.pub
+        dest: /home/ubuntu/.ssh/authorized_keys
+        mode: '0600'
