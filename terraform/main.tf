@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   name   = "xpto-vpc"
@@ -13,10 +9,18 @@ module "vpc" {
   enable_vpn_gateway = true
 }
 
-resource "aws_eks_cluster" "main" {
-  name     = "xpto-cluster"
-  role_arn = aws_iam_role.eks.arn
-  vpc_config {
-    subnet_ids = module.vpc.private_subnets
+module "eks" {
+  source          = "terraform-aws-modules/eks/aws"
+  cluster_name    = "xpto-cluster"
+  cluster_version = "1.29"
+  subnets         = module.vpc.private_subnets
+  vpc_id          = module.vpc.vpc_id
+
+  node_groups = {
+    xpto_nodes = {
+      desired_capacity = var.eks_desired_capacity
+      max_capacity     = var.eks_max_size
+      instance_type    = var.eks_instance_type
+    }
   }
 }

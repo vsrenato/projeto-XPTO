@@ -2,8 +2,6 @@
 
 **Arquitetura Híbrida com Integração On-Premises + AWS Cloud**
 
-![Diagrama de Arquitetura Híbrida](diagrams/arquitetura.png)
-
 **Componentes:**
 - Usuário final
 - Internet / CloudFront (CDN)

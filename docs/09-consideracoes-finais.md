@@ -15,3 +15,13 @@ Durante o planejamento e execução, as seguintes decisões demonstram habilidad
 - Adoção de malha de serviço (Istio) para observabilidade e segurança L7
 
 Essas decisões e propostas adicionais reforçam a capacidade de alinhar soluções técnicas a objetivos de negócio, respeitando prazos e recursos disponíveis.
+
+### Considerações adicionais (não implementadas)
+```yaml
+consideracoes:
+  - step_functions_integracao: false
+  - ambiente_homologacao_separado: false
+  - gitops_pipeline: false
+  - control_tower: false
+  - malha_servico_l7: false
+```
