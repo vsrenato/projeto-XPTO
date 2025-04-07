@@ -4,6 +4,9 @@
 - Ansible para configuração de VMs on-prem
 - CI/CD com GitHub Actions
 
+### `infra-provisioning.yml`
+```yaml
+
 name: Infraestrutura Híbrida - Terraform e Ansible
 
 on:
@@ -57,3 +60,4 @@ jobs:
       - name: Executar playbook Ansible
         run: |
           ansible-playbook ansible/site.yml -i ansible/inventory.ini
+```
