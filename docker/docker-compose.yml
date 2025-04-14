@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  ansible_control:
+    image: ubuntu:20.04
+    container_name: ansible_control
+    volumes:
+      - ./ansible:/ansible
+    working_dir: /ansible
+    tty: true
+    command: >
+      bash -c "
+        apt update &&
+        apt install -y ansible sshpass &&
+        bash
+      "
