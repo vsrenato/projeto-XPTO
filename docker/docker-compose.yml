@@ -1,16 +1,24 @@
 version: '3.8'
 
 services:
-  ansible_control:
-    image: ubuntu:20.04
-    container_name: ansible_control
+  control-service:
+    image: ubuntu:22.04
+    container_name: control_service
+    command: sleep infinity
     volumes:
       - ./ansible:/ansible
-    working_dir: /ansible
-    tty: true
-    command: >
-      bash -c "
-        apt update &&
-        apt install -y ansible sshpass &&
-        bash
-      "
+    networks:
+      - internal
+
+  consolidation-service:
+    image: ubuntu:22.04
+    container_name: daily_consolidation_service
+    command: sleep infinity
+    volumes:
+      - ./ansible:/ansible
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

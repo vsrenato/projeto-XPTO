@@ -1,11 +1,21 @@
 Vagrant.configure("2") do |config|
-  config.vm.define "node01" do |node|
-    node.vm.box = "ubuntu/focal64"
-    node.vm.hostname = "node01"
-    node.vm.network "private_network", ip: "192.168.56.101"
-    node.vm.provision "shell", inline: <<-SHELL
-      apt update
-      apt install -y docker.io
-    SHELL
+
+  config.vm.define "control-service" do |control|
+    control.vm.box = "ubuntu/jammy64"
+    control.vm.hostname = "control-service"
+    control.vm.network "private_network", ip: "192.168.56.10"
+    control.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
   end
+
+  config.vm.define "daily-consolidation-service" do |consolidation|
+    consolidation.vm.box = "ubuntu/jammy64"
+    consolidation.vm.hostname = "daily-consolidation"
+    consolidation.vm.network "private_network", ip: "192.168.56.11"
+    consolidation.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+
 end
