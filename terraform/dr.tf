@@ -22,8 +22,32 @@ resource "aws_s3_bucket" "backup" {
     id      = "retention"
     enabled = true
 
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    transition {
+      days          = 90
+      storage_class = "GLACIER"
+    }
+
     expiration {
-      days = 30
+      days = 365
+    }
+
+    noncurrent_version_transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    noncurrent_version_transition {
+      days          = 90
+      storage_class = "GLACIER"
+    }
+
+    noncurrent_version_expiration {
+      days = 365
     }
   }
 }
